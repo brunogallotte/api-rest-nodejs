@@ -41,7 +41,7 @@ describe('Transactions routes', () => {
 
     const listTransactionResponse = await request(app.server)
       .get('/transactions')
-      .set('Cookie', cookies)
+      .set('Cookie', cookies!)
       .expect(200)
 
     expect(listTransactionResponse.body.transactions).toEqual([
@@ -65,14 +65,14 @@ describe('Transactions routes', () => {
 
     const listTransactionsResponse = await request(app.server)
       .get('/transactions')
-      .set('Cookie', cookies)
+      .set('Cookie', cookies!)
       .expect(200)
 
     const transactionId = listTransactionsResponse.body.transactions[0].id
 
     const getTransactionResponse = await request(app.server)
       .get(`/transactions/${transactionId}`)
-      .set('Cookie', cookies)
+      .set('Cookie', cookies!)
       .expect(200)
 
     expect(getTransactionResponse.body.transaction).toEqual(
@@ -96,7 +96,7 @@ describe('Transactions routes', () => {
 
     await request(app.server)
       .post('/transactions')
-      .set('Cookie', cookies)
+      .set('Cookie', cookies!)
       .send({
         title: 'Debit transaction',
         amount: 2000,
@@ -105,7 +105,7 @@ describe('Transactions routes', () => {
 
     const summaryResponse = await request(app.server)
       .get('/transactions/summary')
-      .set('Cookie', cookies)
+      .set('Cookie', cookies!)
       .expect(200)
 
     expect(summaryResponse.body.summary).toEqual({
